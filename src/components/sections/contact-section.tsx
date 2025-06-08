@@ -229,7 +229,7 @@ export function ContactSection() {
             className="flex justify-center items-center gap-6"
             variants={itemVariants}
           >
-            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+            <div className="hidden sm:flex items-center gap-1 text-sm text-muted-foreground">
               <span>Or find me on</span>
             </div>
 
