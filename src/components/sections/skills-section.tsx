@@ -186,7 +186,7 @@ const LanguageMarqueeItem = ({
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="py-24 px-4">
+    <section id="skills" className="py-24 px-4 font-mono">
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial="hidden"
@@ -198,10 +198,6 @@ export function SkillsSection() {
             <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
               Skills
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              A comprehensive overview of my technical skills across frontend,
-              backend, mobile, AI, and IoT development
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">

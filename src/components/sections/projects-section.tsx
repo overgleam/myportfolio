@@ -19,7 +19,7 @@ import Image from "next/image";
 
 const projects = [
   {
-    title: "Edupath",
+    title: "EduPath",
     description:
       "A hybrid machine learning model for guiding senior high school graduates in higher education. My thesis project that combines multiple ML algorithms to provide personalized educational pathways.",
     tech: [
@@ -33,7 +33,7 @@ const projects = [
     ],
     github: "https://github.com/overgleam/edupath",
     live: "https://josephalforque23.web.app",
-    image: "/Slices_19.gif",
+    image: "/edupath.png",
     featured: false,
     category: "Machine Learning",
   },
@@ -42,9 +42,9 @@ const projects = [
     description:
       "A comprehensive homeowners subdivision management system featuring resident management, billing, announcements, and community engagement tools.",
     tech: ["ASP.NET Core", "C#", "SQL Server", "HTML", "CSS", "JavaScript"],
-    github: "https://github.com/overgleam/community-portal",
+    github: "https://github.com/overgleam/communityportal",
     // live: "https://josephalforque.vercel.app",
-    image: "/Slices_19.gif",
+    image: "/communityportal.jpg",
     featured: false,
     category: "Full-Stack Development",
   },
@@ -55,7 +55,7 @@ const projects = [
     tech: ["React Native", "Tailwind CSS", "Pytorch", "Python", "YOLO"],
     github: "https://github.com/overgleam/jeepney-recognition",
     // live: "https://alforque.vercel.app",
-    image: "/Slices_19.gif",
+    image: "/jeepney.jpg",
     featured: false,
     category: "Computer Vision",
   },
@@ -86,10 +86,7 @@ const itemVariants = {
 
 const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   return (
-    <motion.div
-      variants={itemVariants}
-      className="relative [&:hover_.magic-card-bg]:opacity-100"
-    >
+    <motion.div variants={itemVariants} className="relative">
       <Card className="relative h-full overflow-hidden bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-500">
         <BorderBeam
           size={250}
@@ -108,9 +105,9 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               height={500}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute top-4 left-4">
+            <div className="absolute bottom-4 left-4">
               <Badge
-                variant="secondary"
+                variant="outline"
                 className="bg-background/80 backdrop-blur-sm text-foreground"
               >
                 {project.category}
@@ -182,7 +179,10 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-32 px-4 relative overflow-hidden">
+    <section
+      id="projects"
+      className="py-32 px-4 relative overflow-hidden font-mono"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl animate-pulse" />
@@ -198,19 +198,10 @@ export function ProjectsSection() {
           variants={containerVariants}
         >
           {/* Section Header */}
-          <motion.div className="text-center mb-10" variants={itemVariants}>
-            <motion.h2 className="text-4xl md:text-6xl font-bold">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <motion.h2 className="text-4xl md:text-6xl font-bold mb-4">
               Projects
             </motion.h2>
-
-            <motion.p
-              className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-              variants={itemVariants}
-            >
-              A showcase of my latest work in web development, AI integration,
-              and innovative digital solutions. Each project represents a unique
-              challenge and creative solution.
-            </motion.p>
           </motion.div>
 
           {/* Projects Grid */}

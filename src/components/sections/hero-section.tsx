@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { RainbowButton } from "../magicui/rainbow-button";
 import { SparklesText } from "../magicui/sparkles-text";
 import Image from "next/image";
+import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,7 +32,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4"
+      className="min-h-screen flex items-center justify-center px-4 font-mono"
     >
       <motion.div
         className="text-center max-w-4xl mx-auto"
@@ -59,29 +60,38 @@ export function HeroSection() {
           variants={itemVariants}
           className="text-xl md:text-2xl text-muted-foreground mb-8"
         >
-          Full-Stack Software Engineer
+          Aspiring Software Engineer
         </motion.p>
 
         <motion.p
           variants={itemVariants}
           className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
         >
-          Passionate about creating innovative web applications with modern
-          technologies. I build scalable, user-friendly solutions that make a
-          difference.
+          Passionate about learning and building web applications, always
+          seeking to improve skills and explore new technologies. Interests
+          include AI, machine learning, and design.
         </motion.p>
 
         <motion.div
           variants={itemVariants}
           className="flex flex-wrap gap-4 justify-center"
         >
-          <RainbowButton size="lg" className="gap-2">
-            <MailIcon className="w-4 h-4" />
-            Get In Touch
+          <RainbowButton size="lg" className="gap-2" asChild>
+            <Link href="#contact">
+              <MailIcon className="w-4 h-4" />
+              Get In Touch
+            </Link>
           </RainbowButton>
-          <RainbowButton size="lg" className="gap-2" variant="outline">
-            <ExternalLinkIcon className="w-4 h-4" />
-            View Resume
+          <RainbowButton size="lg" className="gap-2" variant="outline" asChild>
+            <Link
+              href="/resume.pdf"
+              download="Joseph_Alforque_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLinkIcon className="w-4 h-4" />
+              View Resume
+            </Link>
           </RainbowButton>
         </motion.div>
       </motion.div>

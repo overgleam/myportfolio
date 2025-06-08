@@ -1,16 +1,10 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  CodeIcon,
-  DatabaseIcon,
-  ServerIcon,
-  CloudIcon,
-  UserIcon,
-  SparklesIcon,
-} from "lucide-react";
+import { SparklesIcon, GraduationCapIcon, BriefcaseIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { Pointer } from "@/components/magicui/pointer";
+import { TypingAnimation } from "../magicui/typing-animation";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -49,54 +43,8 @@ const cardVariants = {
 };
 
 export function AboutSection() {
-  const highlights = [
-    {
-      icon: CodeIcon,
-      title: "Web Development",
-      description: "React, Next.js, TypeScript",
-      gradient: "from-blue-500 to-cyan-500",
-      bgGradient: "from-blue-500/10 to-cyan-500/10",
-    },
-    {
-      icon: ServerIcon,
-      title: "Backend Systems",
-      description: "Python, Java, C#, APIs",
-      gradient: "from-green-500 to-emerald-500",
-      bgGradient: "from-green-500/10 to-emerald-500/10",
-    },
-    {
-      icon: DatabaseIcon,
-      title: "Data Management",
-      description: "MongoDB, MySQL, Firebase",
-      gradient: "from-purple-500 to-violet-500",
-      bgGradient: "from-purple-500/10 to-violet-500/10",
-    },
-    {
-      icon: CloudIcon,
-      title: "Development Tools",
-      description: "Git, Vercel, Figma",
-      gradient: "from-orange-500 to-pink-500",
-      bgGradient: "from-orange-500/10 to-pink-500/10",
-    },
-  ];
-
-  const techStack = [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Python",
-    "Java",
-    "C#",
-    "MongoDB",
-    "MySQL",
-    "Firebase",
-    "Git",
-    "Figma",
-    "Vercel",
-  ];
-
   return (
-    <section id="about" className="py-32 px-4 ">
+    <section id="about" className="py-32 px-4 font-mono">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl" />
@@ -104,7 +52,7 @@ export function AboutSection() {
         <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-pink-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -121,115 +69,202 @@ export function AboutSection() {
           {/* Main Content Grid */}
           <motion.div
             variants={itemVariants}
-            className="grid lg:grid-cols-2 gap-16 items-start mb-20"
+            className="grid lg:grid-cols-2 gap-8"
           >
-            {/* Left Column - Story */}
+            {/* Introduction Section */}
+            <motion.div
+              className="relative"
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              variants={itemVariants}
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg blur opacity-25" />
+              <div className="relative bg-card/50 backdrop-blur-sm p-8 md:p-12 rounded-lg border border-border/50 h-full">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                    <SparklesIcon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-semibold">Hi There!</h3>
+                </div>
+
+                <div className="space-y-6">
+                  <TypingAnimation
+                    duration={15}
+                    className="text-md font-light text-muted-foreground text-justify leading-relaxed"
+                  >
+                    I'm Joseph Alforque. I recently graduated with a degree in
+                    Computer Science from the University of Cebu, with a strong
+                    passion for web development and AI projects. I'm currently
+                    exploring AI, machine learning, and software development,
+                    and seeking opportunities to grow as a software engineer.
+                  </TypingAnimation>
+
+                  <TypingAnimation
+                    duration={10}
+                    delay={4300}
+                    className="text-md font-light text-muted-foreground text-justify leading-relaxed"
+                  >
+                    If you're looking for a passionate and motivated team member
+                    who's eager to learn and contribute, I'd love to connect and
+                    discuss how I can add value to your team!
+                  </TypingAnimation>
+                </div>
+              </div>
+              <Pointer>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="10" className="fill-purple-500" />
+                  <circle cx="12" cy="12" r="5" className="fill-white" />
+                </svg>
+              </Pointer>
+            </motion.div>
+
+            {/* Education & Experience Section */}
             <div className="space-y-8">
+              {/* Education Section */}
               <motion.div
                 className="relative"
                 whileInView={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.3 }}
+                variants={cardVariants}
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg blur opacity-25" />
-                <div className="relative bg-card/50 backdrop-blur-sm p-8 rounded-lg border border-border/50">
+                <div className="absolute -inset-1 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg blur opacity-25" />
+                <div className="relative bg-card/50 backdrop-blur-sm p-8 rounded-lg border border-border/50 h-full">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                      <SparklesIcon className="w-5 h-5 text-white" />
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center">
+                      <GraduationCapIcon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold">Hi There!</h3>
+                    <h3 className="text-xl font-semibold">Education</h3>
                   </div>
 
-                  <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                    I'm Joseph Alforque, I recently graduated Computer Science
-                    in University of Cebu. I'm passionate about web development
-                    and AI projects. I'm currently exploring AI, ML, and
-                    software development, and looking for opportunities to grow
-                    as a software engineer.
-                  </p>
-
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    I'm currently seeking opportunities to start my career as a
-                    software engineer or developer. If you're looking for a
-                    passionate and motivated team member who's eager to learn
-                    and contribute, I'd love to connect and discuss how I can
-                    add value to your team!
-                  </p>
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-xl bg-white p-2 shadow-lg border border-border/20 flex-shrink-0">
+                        <Image
+                          src="/UC.jpg"
+                          alt="University of Cebu"
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-contain rounded-lg"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-lg font-semibold text-foreground mb-1">
+                          University of Cebu — Main
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          SB in Computer Science | 2020 - 2025
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <Pointer>
+                  <motion.div
+                    animate={{
+                      scale: [0.8, 1, 0.8],
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <svg
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="text-pink-600"
+                    >
+                      <motion.path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                        fill="currentColor"
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{
+                          duration: 0.8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </svg>
+                  </motion.div>
+                </Pointer>
               </motion.div>
 
-              {/* Tech Stack */}
+              {/* Experience Section */}
               <motion.div
+                className="relative"
                 whileInView={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
+                variants={cardVariants}
               >
-                <h4 className="text-lg font-semibold mb-4">
-                  Technologies I work with
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {techStack.map((tech, index) => (
-                    <motion.div
-                      key={tech}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 * index }}
-                    >
-                      <Badge
-                        variant="secondary"
-                        className="text-sm py-2 px-4 bg-muted/50 hover:bg-muted/80 transition-all duration-300 border border-border/50 hover:border-primary/30"
-                      >
-                        {tech}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg blur opacity-25" />
+                <div className="relative bg-card/50 backdrop-blur-sm p-8 rounded-lg border border-border/50 h-full">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                      <BriefcaseIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-semibold">Experience</h3>
+                  </div>
 
-            {/* Right Column - Highlights Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {highlights.map((item, index) => {
-                const IconComponent = item.icon;
-                return (
-                  <motion.div
-                    key={item.title}
-                    variants={cardVariants}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Card
-                      className={`h-full bg-gradient-to-br ${item.bgGradient} border-border/30 hover:border-primary/30 transition-all duration-500 group relative overflow-hidden`}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-transparent to-background/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                      <CardContent className="p-8 text-center relative z-10">
-                        <div className="relative mb-6">
-                          <div
-                            className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${item.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg`}
-                          >
-                            <IconComponent className="w-8 h-8 text-white" />
-                          </div>
-                          <div
-                            className={`absolute inset-0 w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${item.gradient} opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-500`}
-                          />
-                        </div>
-
-                        <h3 className="font-bold text-lg mb-3 text-foreground">
-                          {item.title}
-                        </h3>
-
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {item.description}
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-xl bg-white p-2 shadow-lg border border-border/20 flex-shrink-0">
+                        <Image
+                          src="/MYT LOGO.png"
+                          alt="MYT Softdev Solutions"
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-contain rounded-lg"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-lg font-semibold text-foreground mb-1">
+                          MYT Softdev Solutions Inc.
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          Software Developer | Aug 2024 - Oct 2024
                         </p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-xl bg-white p-2 shadow-lg border border-border/20 flex-shrink-0">
+                        <Image
+                          src="/Innosoft.png"
+                          alt="Innosoft Solutions"
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-contain rounded-lg"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-lg font-semibold text-foreground mb-1">
+                          Innosoft Solutions Inc.
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          Computer Servicing | Nov 2019 - Dec 2019
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <Pointer className="fill-blue-500" />
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>

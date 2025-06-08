@@ -65,7 +65,7 @@ const cardVariants = {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-24 px-4">
+    <section id="contact" className="py-20 px-4 font-mono">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl animate-pulse" />
@@ -85,10 +85,10 @@ export function ContactSection() {
             <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
               Ready to Build Something
               <br />
-              <AuroraText>Amazing Together?</AuroraText>
+              <AuroraText className="mt-4">Amazing Together?</AuroraText>
             </h2>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-md md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               I'm always excited about new opportunities and innovative
               projects. Let's discuss how we can turn your vision into reality.
             </p>
@@ -101,7 +101,7 @@ export function ContactSection() {
             {/* Primary CTA */}
             <motion.div variants={cardVariants}>
               <Card className="p-0 shadow-none border-none">
-                <MagicCard className="py-6 [&:hover_.magic-card-bg]:opacity-100">
+                <MagicCard className="py-6" gradientOpacity={0.2}>
                   <CardContent className="p-8">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center transition-transform duration-300 hover:scale-110">
@@ -191,7 +191,7 @@ export function ContactSection() {
             {/* Secondary CTA */}
             <motion.div variants={cardVariants}>
               <Card className="p-0 shadow-none border-none">
-                <MagicCard className="py-6 [&:hover_.magic-card-bg]:opacity-100">
+                <MagicCard className="py-6" gradientOpacity={0.2}>
                   <CardContent className="p-8">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center transition-transform duration-300 hover:scale-110">
@@ -264,11 +264,6 @@ export function ContactSection() {
                 </Link>
               </Button>
             </div>
-          </motion.div>
-
-          {/* Bottom decoration */}
-          <motion.div className="mt-16 text-center" variants={itemVariants}>
-            <div className="inline-block w-16 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
           </motion.div>
         </motion.div>
       </div>
