@@ -1,12 +1,12 @@
 "use client";
 
 import { SparklesIcon, GraduationCapIcon, BriefcaseIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { Pointer } from "@/components/magicui/pointer";
 import { TypingAnimation } from "../magicui/typing-animation";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,7 +17,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 60, opacity: 0 },
   visible: {
     y: 0,
@@ -29,7 +29,7 @@ const itemVariants = {
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { y: 40, opacity: 0, scale: 0.95 },
   visible: {
     y: 0,

@@ -23,6 +23,12 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Dock, DockIcon } from "@/components/magicui/dock";
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -77,44 +83,25 @@ const handleSmoothScroll = (
 };
 
 export function DockDemo() {
+  const { scrollY } = useScroll();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  useEffect(() => {
-    const controlDock = () => {
-      const currentScrollY = window.scrollY;
-
-      // Show dock at the top of the page
-      if (currentScrollY < 10) {
-        setIsVisible(true);
-      }
-      // Hide dock when scrolling down, show when scrolling up
-      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else if (currentScrollY < lastScrollY) {
-        setIsVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    // Add scroll event listener
-    window.addEventListener("scroll", controlDock);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("scroll", controlDock);
-    };
-  }, [lastScrollY]);
+  useMotionValueEvent(scrollY, "change", (latestValue: number) => {
+    if (latestValue < lastScrollY) {
+      setIsVisible(true);
+    } else if (latestValue > lastScrollY + 15) {
+      setIsVisible(false);
+    }
+    setLastScrollY(latestValue);
+  });
 
   return (
-    <div
-      className={cn(
-        "fixed left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-in-out",
-        isVisible
-          ? "top-0 translate-y-0 opacity-100"
-          : "top-0 translate-y-16 opacity-0 pointer-events-none"
-      )}
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
+      transition={{ duration: 0.3 }}
+      className={cn("fixed left-1/2 transform -translate-x-1/2 z-50")}
     >
       <TooltipProvider>
         <Dock
@@ -179,6 +166,6 @@ export function DockDemo() {
           </DockIcon>
         </Dock>
       </TooltipProvider>
-    </div>
+    </motion.div>
   );
 }

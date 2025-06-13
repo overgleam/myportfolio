@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { GithubIcon, ExternalLinkIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Lens } from "../magicui/lens";
 import { BorderBeam } from "../magicui/border-beam";
 import { InteractiveHoverButton } from "../magicui/interactive-hover-button";
@@ -61,7 +61,7 @@ const projects = [
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -72,7 +72,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 30, opacity: 0 },
   visible: {
     y: 0,

@@ -10,7 +10,7 @@ import {
   InstagramIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { AuroraText } from "../magicui/aurora-text";
 import { MagicCard } from "../magicui/magic-card";
 import { InteractiveHoverButton } from "../magicui/interactive-hover-button";
@@ -27,8 +27,10 @@ import {
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { Input } from "../ui/input";
+import { useState } from "react";
+import { toast } from "sonner";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -38,7 +40,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 40, opacity: 0 },
   visible: {
     y: 0,
@@ -50,7 +52,7 @@ const itemVariants = {
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { y: 60, opacity: 0, scale: 0.9 },
   visible: {
     y: 0,
@@ -64,6 +66,62 @@ const cardVariants = {
 };
 
 export function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast.success("Message sent successfully! 🎉", {
+          description: "I'll get back to you within 24 hours.",
+          duration: 5000,
+        });
+        setFormData({ name: "", email: "", message: "" });
+        setIsDrawerOpen(false); // Close the drawer
+      } else {
+        const errorData = await response.json();
+        toast.error("Failed to send message", {
+          description: errorData.error || "Please try again later.",
+          duration: 5000,
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Something went wrong", {
+        description: "Please check your connection and try again.",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 px-4 font-mono">
       {/* Background decorative elements */}
@@ -117,7 +175,7 @@ export function ContactSection() {
                     <p className="text-muted-foreground mb-6">
                       Drop me a line and I'll get back to you within 24 hours.
                     </p>
-                    <Drawer>
+                    <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
                       <DrawerTrigger asChild>
                         <InteractiveHoverButton className="w-full">
                           Send Message
@@ -130,8 +188,11 @@ export function ContactSection() {
                             I'll get back to you within 24 hours.
                           </DrawerDescription>
                         </DrawerHeader>
-                        <div className="md:flex items-center justify-center">
-                          <div className="p-4 space-y-4 md:min-w-xl">
+                        <form
+                          onSubmit={handleSubmit}
+                          className="md:flex items-center justify-center"
+                        >
+                          <div className="p-4 space-y-4 md:w-xl ">
                             <div className="space-y-2">
                               <Label
                                 htmlFor="name"
@@ -143,6 +204,9 @@ export function ContactSection() {
                                 id="name"
                                 type="text"
                                 placeholder="Your name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                required
                                 className="w-full px-3 py-2 border border-border rounded-md bg-background"
                               />
                             </div>
@@ -157,6 +221,9 @@ export function ContactSection() {
                                 id="email"
                                 type="email"
                                 placeholder="your.email@example.com"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
                                 className="w-full px-3 py-2 border border-border rounded-md bg-background"
                               />
                             </div>
@@ -170,17 +237,24 @@ export function ContactSection() {
                               <Textarea
                                 id="message"
                                 placeholder="Your message..."
+                                value={formData.message}
+                                onChange={handleInputChange}
+                                required
+                                className="max-h-[120px] sm:max-h-[150px] resize-none"
+                                rows={5}
                               />
                             </div>
 
                             <DrawerFooter>
-                              <Button>Send Message</Button>
+                              <Button type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? "Sending..." : "Send Message"}
+                              </Button>
                               <DrawerClose asChild>
                                 <Button variant="outline">Cancel</Button>
                               </DrawerClose>
                             </DrawerFooter>
                           </div>
-                        </div>
+                        </form>
                       </DrawerContent>
                     </Drawer>
                   </CardContent>

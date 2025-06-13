@@ -51,7 +51,7 @@ export default function RootLayout({
           />
           <DockDemo />
           {children}
-          <Toaster />
+          <Toaster position="top-left" richColors closeButton />
           <ScrollProgress className="z-10 h-0.5" />
         </ThemeProvider>
       </body>

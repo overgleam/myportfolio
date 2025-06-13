@@ -1,13 +1,13 @@
 "use client";
 
 import { MailIcon, ExternalLinkIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { RainbowButton } from "../magicui/rainbow-button";
 import { SparklesText } from "../magicui/sparkles-text";
 import Image from "next/image";
 import Link from "next/link";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,7 +17,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
