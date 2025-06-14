@@ -237,7 +237,7 @@ export function AboutSection() {
                           MYT Softdev Solutions Inc.
                         </h4>
                         <p className="text-sm text-muted-foreground">
-                          Software Developer | Aug 2024 - Oct 2024
+                          Software Developer | Sep 2024 - Nov 2024
                         </p>
                       </div>
                     </div>

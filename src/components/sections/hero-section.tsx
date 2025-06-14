@@ -6,6 +6,7 @@ import { RainbowButton } from "../magicui/rainbow-button";
 import { SparklesText } from "../magicui/sparkles-text";
 import Image from "next/image";
 import Link from "next/link";
+import { ShineBorder } from "../magicui/shine-border";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -34,67 +35,95 @@ export function HeroSection() {
       id="home"
       className="min-h-screen flex items-center justify-center px-4 font-mono"
     >
-      <motion.div
-        className="text-center max-w-4xl mx-auto"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.div variants={itemVariants} className="mb-8">
-          <Image
-            src="/Slices_19.gif"
-            alt="Joseph Alforque"
-            width={128}
-            height={128}
-            className="flex items-center justify-center mx-auto mb-6 rounded-full"
-          />
+      <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <motion.div
+          className="flex justify-center md:order-last"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
+          <motion.div
+            className="rounded-full p-1"
+            animate={{
+              background: [
+                "linear-gradient(45deg, #FF0080, #7928CA, #0070F3)",
+                "linear-gradient(90deg, #0070F3, #FF0080, #7928CA)",
+                "linear-gradient(135deg, #7928CA, #0070F3, #FF0080)",
+                "linear-gradient(180deg, #FF0080, #7928CA, #0070F3)",
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            <Image
+              src="/Slices_19.gif"
+              alt="Joseph Alforque"
+              width={256}
+              height={256}
+              className="rounded-full shadow-2xl w-auto h-auto"
+            />
+          </motion.div>
         </motion.div>
-
-        <motion.h1 variants={itemVariants}>
-          <SparklesText className="text-5xl md:text-7xl font-bold mb-6">
-            Joseph Alforque
-          </SparklesText>
-        </motion.h1>
-
-        <motion.p
-          variants={itemVariants}
-          className="text-xl md:text-2xl text-muted-foreground mb-8"
-        >
-          Aspiring Software Engineer
-        </motion.p>
-
-        <motion.p
-          variants={itemVariants}
-          className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
-        >
-          Passionate about learning and building web applications, always
-          seeking to improve skills and explore new technologies. Interests
-          include AI, machine learning, and design.
-        </motion.p>
 
         <motion.div
-          variants={itemVariants}
-          className="flex flex-wrap gap-4 justify-center"
+          className="text-center md:text-left"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
         >
-          <RainbowButton size="lg" className="gap-2" asChild>
-            <Link href="#contact">
-              <MailIcon className="w-4 h-4" />
-              Get In Touch
-            </Link>
-          </RainbowButton>
-          <RainbowButton size="lg" className="gap-2" variant="outline" asChild>
-            <Link
-              href="/resume.pdf"
-              download="Joseph_Alforque_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+          <motion.h1 variants={itemVariants}>
+            <SparklesText className="text-5xl md:text-7xl font-bold mb-4">
+              Joseph Alforque
+            </SparklesText>
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            className="text-xl md:text-2xl text-muted-foreground mb-8"
+          >
+            Software Engineer & AI Enthusiast
+          </motion.p>
+
+          <motion.p
+            variants={itemVariants}
+            className="text-lg text-muted-foreground mb-12 max-w-lg mx-auto md:mx-0"
+          >
+            I build dynamic and responsive web applications, with a keen
+            interest in artificial intelligence and user-centric design.
+          </motion.p>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap gap-4 justify-center md:justify-start"
+          >
+            <RainbowButton size="lg" className="gap-2" asChild>
+              <Link href="#contact">
+                <MailIcon className="w-4 h-4" />
+                Get In Touch
+              </Link>
+            </RainbowButton>
+            <RainbowButton
+              size="lg"
+              className="gap-2"
+              variant="outline"
+              asChild
             >
-              <ExternalLinkIcon className="w-4 h-4" />
-              View Resume
-            </Link>
-          </RainbowButton>
+              <Link
+                href="/resume.pdf"
+                download="Joseph_Alforque_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLinkIcon className="w-4 h-4" />
+                View Resume
+              </Link>
+            </RainbowButton>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
