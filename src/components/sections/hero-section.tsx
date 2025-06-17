@@ -6,7 +6,6 @@ import { RainbowButton } from "../magicui/rainbow-button";
 import { SparklesText } from "../magicui/sparkles-text";
 import Image from "next/image";
 import Link from "next/link";
-import { ShineBorder } from "../magicui/shine-border";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
