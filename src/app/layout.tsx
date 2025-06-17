@@ -46,7 +46,7 @@ export default function RootLayout({
           <Particles
             size={0.1}
             className="z-0 fixed inset-0"
-            quantity={50}
+            quantity={100}
             ease={80}
           />
           <DockDemo />

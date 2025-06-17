@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 import React, {
   ComponentPropsWithoutRef,
   useEffect,
@@ -83,11 +84,23 @@ export const Particles: React.FC<ParticlesProps> = ({
   ease = 50,
   size = 0.4,
   refresh = false,
-  color = "#ffffff",
+  color,
   vx = 0,
   vy = 0,
   ...props
 }) => {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Theme-based color selection
+  const getThemeColor = () => {
+    if (!mounted) return "#ffffff"; // Default fallback
+    if (color) return color; // Use provided color if specified
+    return theme === "light" ? "#DAA520" : "#ffffff"; // Gold for light, white for dark
+  };
+
+  const currentColor = getThemeColor();
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
@@ -98,6 +111,10 @@ export const Particles: React.FC<ParticlesProps> = ({
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
   const rafID = useRef<number | null>(null);
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -126,7 +143,7 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
       window.removeEventListener("resize", handleResize);
     };
-  }, [color]);
+  }, [currentColor, theme, mounted]);
 
   useEffect(() => {
     onMouseMove();
@@ -200,7 +217,7 @@ export const Particles: React.FC<ParticlesProps> = ({
     };
   };
 
-  const rgb = hexToRgb(color);
+  const rgb = hexToRgb(currentColor);
 
   const drawCircle = (circle: Circle, update = false) => {
     if (context.current) {

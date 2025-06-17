@@ -66,22 +66,6 @@ const DATA = {
   },
 };
 
-const handleSmoothScroll = (
-  e: React.MouseEvent<HTMLAnchorElement>,
-  href: string
-) => {
-  if (href.startsWith("#")) {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }
-};
-
 export function DockDemo() {
   const { scrollY } = useScroll();
   const [isVisible, setIsVisible] = useState(true);
@@ -98,9 +82,13 @@ export function DockDemo() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
-      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0, y: 0, pointerEvents: "none" }}
+      animate={{
+        opacity: isVisible ? 1 : 0,
+        y: isVisible ? 0 : 30,
+        pointerEvents: isVisible ? "auto" : "none",
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
       className={cn("fixed left-1/2 transform -translate-x-1/2 z-50")}
     >
       <TooltipProvider>
@@ -115,7 +103,6 @@ export function DockDemo() {
                   <Link
                     href={item.href}
                     aria-label={item.label}
-                    onClick={(e) => handleSmoothScroll(e, item.href)}
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
                       "size-12 rounded-full hover:bg-primary/10"
@@ -138,7 +125,6 @@ export function DockDemo() {
                   <Link
                     href={social.url}
                     aria-label={social.name}
-                    onClick={(e) => handleSmoothScroll(e, social.url)}
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
                       "size-12 rounded-full hover:bg-primary/10"

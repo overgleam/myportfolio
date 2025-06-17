@@ -91,6 +91,7 @@ export function AboutSection() {
 
                 <div className="space-y-6">
                   <TypingAnimation
+                    startOnView={true}
                     duration={15}
                     className="text-md font-light text-muted-foreground text-justify leading-relaxed"
                   >
@@ -102,6 +103,7 @@ export function AboutSection() {
                   </TypingAnimation>
 
                   <TypingAnimation
+                    startOnView={true}
                     duration={10}
                     delay={4300}
                     className="text-md font-light text-muted-foreground text-justify leading-relaxed"
